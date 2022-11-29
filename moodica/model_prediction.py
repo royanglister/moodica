@@ -11,6 +11,12 @@ IMG_SIZE = 48
 
 
 def prepare_image_for_prediction(img_path):
+    """
+    This function modifies the image so the model can use it.
+    :param img_path: The image's path to process
+    :return: A reshaped 48x48 matrix that contains the image's data.
+    :rtype: numpy array.
+    """
     img = Image.open(img_path)
     mtx = np.array(img)  # Converting the image to a 48x48 numpy array (matrix).
     mtx = mtx.reshape(-1, IMG_SIZE, IMG_SIZE, 1)  # Reshaping the matrix so the model can read it.
@@ -24,6 +30,16 @@ def decode_prediction(prediction_result):
 
 
 def predict(img_path):
+    """
+    This function sends the given image path to the trained model
+    so it returns the predicted user's mood.
+    From there it processes the prediction and sends it
+    to the Spotify recommendation system, which returns the playlist
+    that is being sent to the client.
+    :param img_path: The image path to predict from.
+    :return: A Spotify playlist that matches the predicted mood.
+    :rtype: str
+    """
     model = load_model(SAVED_MODEL_DIR)  # Loading the trained model.
 
     try:

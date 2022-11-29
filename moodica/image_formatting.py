@@ -3,6 +3,15 @@ import cv2
 
 
 def img_format_modify_grayscale(img_loc, high, length):
+    """
+    This function takes an image and returns the path to a new
+    copy of it in size 48x48, grayscale.
+    :param img_loc: image's file path.
+    :param high: height of image in pixels.
+    :param length: width of image in pixels.
+    :return: A path of the new, processed (48x48 grayscaled) image.
+    :rtype: str
+    """
     img = cv2.imread(img_loc)
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_alt2.xml')

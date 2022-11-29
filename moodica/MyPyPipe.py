@@ -7,6 +7,10 @@ class PipeClient:
     fileHandle = 0
 
     def __init__(self, name):
+        """
+        initiating the receiving side of the server's pipe
+        :param name: name of pipe
+        """
         self.fileHandle = win32file.CreateFile(
             "\\\\.\\pipe\\" + name,
             win32file.GENERIC_READ | win32file.GENERIC_WRITE,
@@ -26,7 +30,7 @@ class PipeClient:
         data = data[1:]
         return left, data
 
-    def close_pipe(self):
+    def close_pipe(self):  # Closing the pipe when done communicating
         win32file.CloseHandle(self.fileHandle)
 
 
@@ -39,6 +43,10 @@ class PipeServer:
     fileHandle = 0
 
     def __init__(self, name):
+        """
+        initiating the sending side of the server's pipe
+        :param name: name of pipe
+        """
         self.fileHandle = win32pipe.CreateNamedPipe(
             "\\\\.\\pipe\\" + name,
             win32pipe.PIPE_ACCESS_DUPLEX,
@@ -51,6 +59,10 @@ class PipeServer:
         print("got client")
 
     def send_message(self, msg):
+        """
+        Sending a message to the client that the server has done its work
+        :param msg: the message to send
+        """
         try:
             print(f"writing message {msg}")
             # convert to bytes
@@ -61,5 +73,5 @@ class PipeServer:
         except:
             print(f"Error == py Server")
 
-    def close_pipe(self):
+    def close_pipe(self):  # Closing the pipe when done communicating
         win32file.CloseHandle(self.fileHandle)

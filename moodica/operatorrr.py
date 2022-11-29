@@ -2,7 +2,15 @@ import model_prediction
 import python_pipe
 import time
 
+
 def activate_server(img_path):
+    """
+    This function activates the server (model prediction and
+    Spotify recommendation system) on the given image path.
+    :param img_path: The image path to work with.
+    :return: The Spotify playlist to send the client.
+    :rtype: str
+    """
     client_answer = ""
 
     try:
@@ -20,7 +28,7 @@ def main():
         print("Running AI")
         time.sleep(1)
         my_client_pipe = python_pipe.PipeClient("DebugCS")
-        print("Reciving from client")
+        print("Receiving from client")
         left, img_path = my_client_pipe.read_message()
 
     except:

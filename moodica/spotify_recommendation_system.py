@@ -51,6 +51,9 @@ mood = ''
 
 
 def prepare_seed_artists():
+    """
+    This function extracts a list of the playlists' artists.
+    """
     global seed_artists_ids_list
 
     # Extracting playlists URIs.
@@ -68,6 +71,9 @@ def prepare_seed_artists():
 
 
 def prepare_seed_tracks():
+    """
+    This function extracts a list of the playlists' track IDs.
+    """
     global seed_tracks_ids_list
 
     # Extracting playlists URIs.
@@ -89,6 +95,9 @@ def prepare_seed_tracks():
 
 
 def prepare_seed_genres():
+    """
+    This function extracts a shuffled list of the Spotify's genres.
+    """
     global randomized_seed_genres_list
 
     randomized_seed_genres_list = SEED_GENRES_LIST
@@ -96,6 +105,13 @@ def prepare_seed_genres():
 
 
 def get_recommendations():
+    """
+    This function sends the collected data to Spotify's recommendation function and
+    receives a serialized list that consists of recommended songs that are likely to
+    match the user's mood.
+    :return: A list that contains up to 10 songs and their details.
+    :rtype: list
+    """
     global mood
     global seed_artists_ids_list
     global randomized_seed_genres_list
@@ -126,6 +142,11 @@ def get_recommendations():
 
 
 def display_results(recommendations):
+    """
+    This function shows the playlist's contents in the terminal.
+    :param recommendations:
+    :return:
+    """
     global mood
     global recommended_tracks_uris_list
 
@@ -160,6 +181,11 @@ def display_results(recommendations):
 
 
 def create_new_playlist():
+    """
+    This functions creates a new Spotify playlist that consists of the recommended songs.
+    :return: The new playlist's URL.
+    :rtype: str
+    """
     global mood
     global recommended_tracks_uris_list
 
@@ -181,6 +207,10 @@ def create_new_playlist():
 
 
 def maintain_history():
+    """
+    This function maintains a playlist history so only the newest 10 playlists are being
+    displayed in the account at any given moment.
+    """
     total_spotify_playlists_ids_list = []
     playlist_num = 0
 
@@ -195,6 +225,13 @@ def maintain_history():
 
 
 def activator(detected_mood):
+    """
+    This function activates the other functions in order to get the wanted results from Spotify.
+    :param detected_mood:
+    :return: The message to send the client - consists of the playlist's URL,
+    the predicted mood, and the list of tracks that are in the playlist.
+    :rtype: str
+    """
     global mood
 
     mood = detected_mood
